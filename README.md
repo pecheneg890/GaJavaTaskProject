@@ -4,7 +4,7 @@
 
 - Режим использования (приложение и бд внутри контейнеров)
 
-```docker-compose -f docker-compose-test.yml up```
+```docker-compose -f docker-compose-test.yml up -d```
 
 - Режим разработки (в контейнере только бд)  
 
