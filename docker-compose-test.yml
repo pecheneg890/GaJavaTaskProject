@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_SERVER: mysqldb
+    ports:
+      - "8020:8020"
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+  mysqldb:
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: tracker_db
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 3
